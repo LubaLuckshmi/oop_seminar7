@@ -1,5 +1,7 @@
 package meteo;
 
+import java.time.LocalDateTime;
+
 public class Main {
 
     // Есть библиотека сбора данных от датчиков. Все они были куплены в комплекте с этой библиотекой.
@@ -7,10 +9,11 @@ public class Main {
     // Надо включить этот датчик в систему.
     public static void main(String[] args) {
         MeteoStore meteoDb = new MeteoStore();
+        MeteoSensor st500 = new AdapterSensorTemperature(new ST500Info().getData());
 
         MeteoSensor ms200_1 = new MS200(1);
         meteoDb.save(ms200_1);
-
+        meteoDb.save(st500);
         // Здесь надо вызвать метод getData у класса ST500Info. Полученные данные отправить в метод save объекта meteoDb
     }
 }
